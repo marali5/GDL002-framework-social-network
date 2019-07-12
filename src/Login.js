@@ -11,14 +11,20 @@ class Login extends Component {
 			this.handleChange=this.handleChange.bind(this);
 		this.signup=this.signup.bind(this);
 		this.state={
+			name:'',
 			email:'',
 			password:''
 		}
 	}
 	login(e){
 		e.preventDefault();
-		fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-}).catch((error)=>{
+		const displayName = this.state.displayName;
+		fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function(){
+            const user = fire.auth().currentUser;
+            user.updateProfile({
+                displayName: displayName
+            })
+        }).catch((error)=>{
 	console.log(error);
 });
 	}
@@ -46,9 +52,16 @@ class Login extends Component {
 			<form className="card rounded-lg">
 			<div className="form-group">
 			<label className="register">Registrate</label>
+
+<input value={this.state.name} onChange={this.handleChange} type="name" name="name"
+			className="form-control form" 
+			placeholder="Nombre Completo"/>
+</div>
+<div className="form-group">
+			
 			<input value={this.state.email} onChange={this.handleChange} type="email" name="email"
 			className="form-control form" id="exampleInputEmail" 
-			placeholder="Enter email"/>
+			placeholder="Correo electrónico"/>
 	</div>
 	<div className="form-group">
 	<input value={this.state.password} onChange={this.handleChange} type="password"
@@ -56,10 +69,7 @@ class Login extends Component {
 	</div>
 	<button type="submit" onClick={this.login} className="btnSign btn-success">Login</button>
 	<button onClick={this.signup} className="btn">-- Signup --</button>
-	<div>
-<button onClick={this.signup} class=" btn-primary btn-sm">Facebook</button>
-<button type="button" class=" btn btn-danger btn-sm">Gmail</button>
-	</div>
+	
 	</form>
 </div>
 	</div>

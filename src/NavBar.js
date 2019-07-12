@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import fire from './Fire';
 import menu from './img/menu.png'
 import logo from './img/logo2.png';
-import './NavBar.css'
+import './NavBar.css';
+
 
 class NavBar extends Component {
 	constructor(props){
@@ -16,21 +17,20 @@ class NavBar extends Component {
   render(){
     return(
     	<div>
-    	<nav class="navbar">
-<div class="dropdown">
+    	<nav className="navbar">
+<div className="dropdown">
   <a role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="d-inline-block menu" src={menu}/>
   </a>
 <img class="d-inline-block logo" src={logo}/>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#"><button onClick={this.logout}>Logout</button></a>
+  <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a className="dropdown-item" href="#">Action</a>
+    <a className="dropdown-item" href="#">Another action</a>
+    <a className="dropdown-item" href="#"><button onClick={this.logout}>Logout</button></a>
   </div>
-</div>
+</div> 
 
-    
- 
 </nav>
+
     	</div>
     	)}}
 
