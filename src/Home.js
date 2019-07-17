@@ -7,18 +7,14 @@ import fire from './Fire';
 
 
 class Home extends Component{
-
-	
-
 	render(){
-		
 		return(
-			<div>
+		<div>
 			<NavBar/>
-			 <Post/> 
-			 <ShowComent/>
-			</div>
-			)
+			<Post/> 
+			<ShowComent/>
+		</div>
+		)
 	}
 }
 

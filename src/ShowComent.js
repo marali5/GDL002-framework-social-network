@@ -10,52 +10,45 @@ class ShowComent extends Component {
       allData: []
     }
   }
-
   componentWillMount(){
   	const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
-    var wholeData = []
+    //db.settings({timestampsInSnapshots: true
+    //});
+    let wholeData = []
     db.collection('SocialNetwork').get()
     .then(snapshot => {
-      snapshot.forEach(doc => {
-        wholeData.push(doc.data())
-      });
+    snapshot.forEach(doc => {
+    wholeData.push(doc.data())
+    });
       this.setState({allData: wholeData})
- 
     })
     .catch(error => {
-      console.log('Error!', error);
+    console.log('Error!', error);
     })
   }
   render(){
-  	var listOfData = this.state.allData.map((val, i)=>{
-      var name = val.name
-      var coment = val.coment
+  	let listOfData = this.state.allData.map((val, i)=>{
+    let name = val.name
+    let coment = val.coment
+    let image = val.image
       return (
+	<div className="card cardPost">
+  <button>Eliminar</button>
+    <button>Editar</button>
+  <img className="card-img-top" key={i} src= {image}/>
+  <div className="card-body">
+  <h5 className="card-title" key={i}>{name}</h5>
+    <p class="card-text" key={i}>{coment}</p>
 
-<div class="card border-success cardPost">
-    <div class="card-body">
-       	
-        <h5 class="card-title" key={i}>{name}</h5>
-        <p class="card-text" key={i}>{coment}</p>
-        
-      </div>
-    </div>
-
-
+  </div>
+</div>
       ) 
     })
-		return(
-			
-      <div>
+	 return(
+	<div>
        <ul>{listOfData}</ul>
-     
-      </div>
+    </div>
       );
     }
    }
-
-
 export default ShowComent;

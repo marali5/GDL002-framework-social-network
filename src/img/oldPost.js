@@ -1,31 +1,18 @@
 import React, {Component} from 'react';
 import fire from "./Fire";
-import FileUploader from 'react-firebase-file-uploader';
-
+import UploadPhoto from "./UploadPhoto";
 
 class Post extends Component {
   constructor(props) {
     super(props);
     this.updateInput=this.updateInput.bind(this);
     this.addData=this.addData.bind(this);
-    this.handleUploadSuccess=this.handleUploadSuccess.bind(this);
     this.state = {
-      image:"",
-      imageURL:"",
       name: '',
       coment: '',
       allData: []
     };
   }
-  handleUploadSuccess = filename =>{
-      console.log(filename);
-      this.setState({
-        image:filename,
-      })
-      fire.storage().ref('photo').child(filename).getDownloadURL().then(url=>this.setState({
-        imageURL:url
-      }))
-    }
 
   updateInput(e) {
     this.setState({
@@ -42,8 +29,7 @@ class Post extends Component {
     db.collection('SocialNetwork').add({
       date: new Date(),
       name: this.state.name,
-      coment: this.state.coment,
-      image:this.state.imageURL
+      coment: this.state.coment
     });
     this.setState({
       name: '',
@@ -64,14 +50,7 @@ class Post extends Component {
 
     return (
       <div>
-      <FileUploader
-      accept = "image/*"
-      name ='image'
-      storageRef = { fire.storage().ref('photo') }
-      onUploadSuccess = { this.handleUploadSuccess }
-      />
-
-
+    <UploadPhoto/>
         <form onSubmit={this.addData}>
           <input
             type="text"
@@ -103,3 +82,13 @@ class Post extends Component {
    }
 
 export default Post;
+
+
+
+<div class="card" cardPost">
+  <img class="card-img-top" key={i} src='{image}' alt="Card image cap">
+  <div class="card-body">
+  <h5 className="card-title" key={i}>{name}</h5>
+    <p class="card-text" key={i}>{coment}</p>
+  </div>
+</div>
